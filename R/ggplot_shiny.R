@@ -20,33 +20,33 @@
 ggplot_shiny <- function( dataset = NA ) {
 
   ui <- fluidPage(
-    headerPanel("ggplot GUI"),
+    headerPanel("ZDEX Daten Explorer"),
     sidebarPanel(width = 3,
       conditionalPanel(
         condition = "input.tabs=='Data upload'",
-        h4("Data upload"),
+        h4("Daten Upload"),
         radioButtons(
           "data_input", "",
           choices = if (is.data.frame(dataset)) {
-            list("Load sample data" = 1,
-                 "Upload text file" = 2,
-                 "Paste data" = 3,
-                 "Data passed through R environment" = 4)
+            list("Beispieldaten" = 1,
+                 "Datei hochladen" = 2,
+                 "Daten einfügen" = 3,
+                 "Daten aus R" = 4)
               } else {
-              list("Load sample data" = 1,
-                   "Upload file" = 2,
-                   "Paste data" = 3)
+              list("Beispieldaten" = 1,
+                   "Datei hochladen" = 2,
+                   "Daten einfügen" = 3)
               },
           selected = if (is.data.frame(dataset)) 4 else 1),
         conditionalPanel(
           condition = "input.data_input=='1'",
-          h5("dataset 'mpg' from library(ggplot2) loaded")
+          h5("Der 'mpg' Datensatz aus der ggplot2 Bibliothek")
           ),
         conditionalPanel(
           condition = "input.data_input=='2'",
-          h5("Upload file: "),
+          h5("Datei hochladen: "),
           fileInput("upload", "", multiple = FALSE),
-          selectInput("file_type", "Type of file:",
+          selectInput("file_type", "Dateityp:",
                       list("text (csv)" = "text",
                            "Excel" = "Excel",
                            "SPSS" = "SPSS",
@@ -55,19 +55,19 @@ ggplot_shiny <- function( dataset = NA ) {
                       selected = "text"),
           conditionalPanel(
             condition = "input.file_type=='text'",
-            selectInput("upload_delim", "Delimiter:",
-                        list("Semicolon" = ";",
+            selectInput("upload_delim", "Trennzeichen:",
+                        list("Strichpunkt" = ";",
                              "Tab" = "\t",
-                             "Comma" = ",",
-                             "Space" = " "),
-                        selected = "Semicolon"),
-            selectInput("upload_dec", "Decimal mark:",
-                        list("Comma" = ",",
-                             "Point" = "."),
-                        selected = "Comma")
+                             "Komma" = ",",
+                             "Leerzeichen" = " "),
+                        selected = "Strichpunkt"),
+            selectInput("upload_dec", "Dezimalzeichen:",
+                        list("Komma" = ",",
+                             "Punkt" = "."),
+                        selected = "Komma")
           ),
           actionButton("submit_datafile_button",
-                       "Submit datafile")
+                       "Datei abschicken")
           ),
         conditionalPanel(
           condition = "input.data_input=='3'",
@@ -171,7 +171,7 @@ ggplot_shiny <- function( dataset = NA ) {
         h4("Info")
       )
     ),
-    h6("For more info see the 'Info'-tab or visit",
+    h6("Mehr Informationen gibt es auf dem 'Info'-Tab oder unter",
        a("https://github.com/gertstulp/ggplotgui",
          href = "https://github.com/gertstulp/ggplotgui")),
 
