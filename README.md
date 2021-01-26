@@ -31,7 +31,7 @@ library("ggplotgui")
 Usage
 =====
 
-There are two ways to use this functionality:
+There are different ways to use this functionality:
 
 -   By calling it from within R
 
@@ -40,6 +40,17 @@ There are two ways to use this functionality:
 ggplot_shiny()
 ggplot_shiny(mpg) # Passing ggplot's mpg dataset
 ```
+
+-   By using docker
+
+``` bash
+# First build the docker image
+docker build -t ggui .
+# Then run the container
+docker run --rm -p 3838:3838 -v $PWD/R:/srv/shiny-server/ ggui
+```
+
+Now navigate to <http://localhost:3838/ggui/>
 
 -   By using the following link: <https://site.shinyserver.dck.gmw.rug.nl/ggplotgui/>
 
